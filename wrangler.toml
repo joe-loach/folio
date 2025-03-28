@@ -1,0 +1,10 @@
+name = "folio"
+main = "build/worker/shim.mjs"
+compatibility_date = "2025-03-01"
+
+[build]
+command = "worker-build --release"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
