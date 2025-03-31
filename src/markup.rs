@@ -32,6 +32,14 @@ pub fn page(title: Option<&str>, content: Markup, partial: bool) -> Markup {
                 }
             }
             (footer())
+            aside id="toasts" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50" {
+                (toast("email", html! {
+                    div ".w-4" ."h-4" ."mr-2" {
+                        (PreEscaped(iconify::svg!("carbon:email", width="20", height="20")))
+                    }
+                    "Email Copied"
+                }))
+            }
         }
     }
 }
@@ -82,13 +90,24 @@ fn head(title: Option<&str>) -> Markup {
                 };
                 updateTheme();
             "#))
+
+            (Javascript(r##"
+            const toast = (id) => {
+                const toasts = document.getElementById('toasts');
+
+                const child = toasts.querySelector(`#${id}`);
+                child.classList.remove("hidden");
+
+                setTimeout(() => child.classList.add("hidden"), 3000);
+            };
+            "##))
         }
     }
 }
 
 fn header() -> Markup {
     html! {
-        header class="sticky top-0 z-50 bg-background/75 py-6 backdrop-blur-sm"{
+        header class="sticky top-0 z-40 bg-background/75 py-6 backdrop-blur-sm"{
             nav class="flex items-center justify-between" {
                 (nav_links())
                 div class="flex gap-0 sm:gap-4" {
@@ -141,6 +160,16 @@ fn nav_links() -> Markup {
             (link("home", "/"))
             (link("projects", "/projects"))
             (link("blog", "/blog"))
+        }
+    }
+}
+
+fn toast(id: &str, body: Markup) -> Markup {
+    html! {
+        div id=(id) class="hidden animate-fade-in-toast max-w-xs text-center bg-accent text-sm text-accent-foreground rounded-xl shadow-md" role="alert" tabindex="-1" aria-labelledby="hs-toast-solid-color-dark-label" {
+            div id="hs-toast-solid-color-dark-label" class="flex p-4 items-baseline" {
+                (body)
+            }
         }
     }
 }

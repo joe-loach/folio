@@ -45,15 +45,25 @@ fn intro() -> Markup {
                     }
                 }
                 section class="mt-4 flex items-center gap-4" {
-                    button
-                        class={(BUTTON) "active:bg-green-500"}
-                        onclick="navigator.clipboard.writeText('me@joeloach.co.uk')"
-                        {
+                    button class={(BUTTON) "active:bg-green-500 active:border-green-500"}
+                    onclick="navigator.clipboard.writeText(`${'me'}@joeloach.co.uk`); toast('email');"
+                    {
+                        div ."h-5" ."w-5" {
                             (PreEscaped(iconify::svg!("carbon:copy", width="20", height="20")))
-                            code ."ml-2" ."text-xs" {
-                                "let email = format!(\"{}@joeloach.co.uk\", \"me\");"
+                        }
+                        code ."ml-2" ."text-xs" ."font-semibold" {
+                            span ."hidden" ."xs:inline-block" ."mr-1" { "let email =" }
+                            span ."inline-block" ."whitespace-normal" {
+                                "format!("
+                                (PreEscaped("<wbr />"))
+                                "\"{}@joeloach.co.uk\","
+                                (PreEscaped("<wbr />"))
+                                "\"me\""
+                                (PreEscaped("<wbr />"))
+                                ");"
                             }
                         }
+                    }
                 }
             }
         }
