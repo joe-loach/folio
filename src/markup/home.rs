@@ -35,14 +35,7 @@ fn intro() -> Markup {
                             }
                         }
                     }
-                    section class="flex gap-6" {
-                        a class="text-muted-foreground hover:text-foreground" href="https://www.linkedin.com/in/joe-loach/" target="_blank" title="LinkedIn" {
-                            (PreEscaped(iconify::svg!("lucide:linkedin", width="20", height="20")))
-                        }
-                        a class="text-muted-foreground hover:text-foreground" href="https://github.com/joe-loach" target="_blank" title="GitHub" {
-                            (PreEscaped(iconify::svg!("lucide:github", width="20", height="20")))
-                        }
-                    }
+                    (socials())
                 }
                 section class="mt-4 flex items-center gap-4" {
                     button class={(BUTTON) "active:bg-green-500 active:border-green-500"}

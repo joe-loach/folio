@@ -114,8 +114,24 @@ fn header() -> Markup {
 fn footer() -> Markup {
     html! {
         footer class="flex flex-col items-center justify-center pb-16 sm:flex-row-reverse sm:justify-between" {
+            div {
+                (socials())
+            }
             p ."text-center" ."text-xs" ."text-muted-foreground" {
                 a ."hover:text-foreground" href="https://github.com/joe-loach/folio" { "Hand written html" } " by Joe Loach"
+            }
+        }
+    }
+}
+
+fn socials() -> Markup {
+    html! {
+        section class="flex gap-6" {
+            a class="text-muted-foreground hover:text-foreground" href="https://www.linkedin.com/in/joe-loach/" target="_blank" title="LinkedIn" {
+                (PreEscaped(iconify::svg!("lucide:linkedin", width="20", height="20")))
+            }
+            a class="text-muted-foreground hover:text-foreground" href="https://github.com/joe-loach" target="_blank" title="GitHub" {
+                (PreEscaped(iconify::svg!("lucide:github", width="20", height="20")))
             }
         }
     }
