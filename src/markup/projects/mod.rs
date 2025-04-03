@@ -42,7 +42,7 @@ static PROJECTS: &[Project] = &[
         links: &[
             CardLink {
                 dest: card::Destination::Website,
-                link: "https://bee.joe-gloach.workers.dev/",
+                link: "https://bee.joeloach.co.uk",
             },
             CardLink {
                 dest: card::Destination::Github,
