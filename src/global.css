@@ -35,6 +35,12 @@
   }
 }
 
+@layer utilities {
+  .border {
+    border-color: var(--color-border);
+  }
+}
+
 @layer base {
   :root {
     --background: hsl(0 0% 100%);
@@ -49,6 +55,7 @@
     --muted-foreground: hsl(220 8.9% 46.1%);
     --border: hsl(220 13% 91%);
     --input: hsl(220 13% 91%);
+    --card: hsl(0 0% 100%);
   }
   .dark {
     --background: hsl(224 71.4% 4.1%);
@@ -63,6 +70,7 @@
     --muted-foreground: hsl(217.9 10.6% 64.9%);
     --border: hsl(215 27.9% 16.9%);
     --input: hsl(215 27.9% 16.9%);
+    --card: hsl(224 71.4% 4.1%);
   }
 
   body {
