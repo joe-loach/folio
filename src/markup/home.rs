@@ -38,20 +38,30 @@ fn intro() -> Markup {
                     (socials())
                 }
                 section class="mt-4 flex items-center gap-4" {
-                    button class={(BUTTON) "active:bg-green-500 active:border-green-500"}
+                    button class={(BUTTON) "group active:bg-green-500 active:border-green-500"}
                     onclick="navigator.clipboard.writeText(`${'me'}@joeloach.co.uk`); toast('email');"
                     {
                         div ."h-5" ."w-5" {
                             (PreEscaped(iconify::svg!("carbon:copy", width="20", height="20")))
                         }
-                        code ."ml-2" ."text-xs" ."font-semibold" {
-                            span ."hidden" ."xs:inline-block" ."mr-1" { "let email =" }
+                        code ."ml-2" ."text-xs" ."font-normal" ."text-muted-foreground/75" ."group-active:text-foreground" {
+                            // let email = 
+                            span ."hidden" ."xs:inline-block" ."mr-1" {
+                                span { "let " }
+                                span ."text-sky-500" ."group-active:text-foreground" ."font-bold" { "email " }
+                                span { "=" }
+                            }
+                            @let string = "text-green-500 dark:text-green-400 group-active:text-foreground font-bold";
+                            // format!("{}@joeloach.co.uk", "me")
                             span ."inline-block" ."whitespace-normal" {
-                                "format!("
+                                span { "format!(" }
                                 (PreEscaped("<wbr />"))
-                                "\"{}@joeloach.co.uk\","
+                                span class=(string) { "\"" }
+                                span { "{}" }
+                                span class=(string) { "@joeloach.co.uk\"" }
+                                ", "
                                 (PreEscaped("<wbr />"))
-                                "\"me\""
+                                span class=(string) { "\"me\"" }
                                 (PreEscaped("<wbr />"))
                                 ");"
                             }
