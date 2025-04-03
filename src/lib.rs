@@ -9,7 +9,7 @@ use axum::{
     routing::{any, get},
 };
 use axum_htmx::{HX_REQUEST, HxBoosted, HxRequest};
-use markup::page;
+use markup::page_layout;
 use tower_service::Service as _;
 
 async fn auto_vary(req: Request, next: Next) -> Result<Response, StatusCode> {
@@ -32,18 +32,11 @@ fn router() -> Router {
             "/",
             get(
                 |HxRequest(hx): HxRequest, HxBoosted(boosted): HxBoosted| async move {
-                    page(None, markup::home::page(), hx | boosted)
+                    page_layout(None, markup::home::page(), hx | boosted)
                 },
             ),
         )
-        .route(
-            "/projects",
-            get(
-                |HxRequest(hx): HxRequest, HxBoosted(boosted): HxBoosted| async move {
-                    page(Some("Projects"), markup::projects::page(), hx | boosted)
-                },
-            ),
-        )
+        .nest("/projects", markup::projects::router())
         .route(
             "/blog",
             any(|| async { Redirect::permanent("https://blog.joeloach.co.uk") }),

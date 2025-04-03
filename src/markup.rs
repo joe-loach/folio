@@ -14,7 +14,7 @@ fn format_title(name: Option<&str>) -> String {
 }
 
 /// Page layout
-pub fn page(title: Option<&str>, content: Markup, partial: bool) -> Markup {
+pub fn page_layout(title: Option<&str>, content: Markup, partial: bool) -> Markup {
     if partial {
         return html! {
             title { (format_title(title)) }
@@ -179,6 +179,14 @@ fn toast(id: &str, body: Markup) -> Markup {
             div id="hs-toast-solid-color-dark-label" class="flex p-4 items-baseline" {
                 (body)
             }
+        }
+    }
+}
+
+fn tag(name: &str) -> Markup {
+    html! {
+        div class="inline-flex items-center rounded-md font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 bg-secondary text-secondary-foreground hover:bg-secondary/80 px-1 py-0 text-[10px]" {
+            (name)
         }
     }
 }
