@@ -75,7 +75,7 @@ fn technologies() -> Markup {
         html! {
             li ."w-[50px] h-auto" {
                 div ."flex" ."flex-col" ."items-center" ."gap-1" {
-                    button class="border border-transparent hover:border-foreground rounded-lg" title=(name) alt=(format!("{} Icon", name)) {
+                    button class="border border-transparent hover:border-foreground rounded-xl" title=(name) alt=(format!("{} Icon", name)) {
                         @if let Some(dark_icon) = dark_icon {
                             div ."dark:hidden" { (icon) }
                             div ."not-dark:hidden" { (dark_icon) }
