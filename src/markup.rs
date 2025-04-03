@@ -3,7 +3,7 @@ pub mod projects;
 
 use maud::{DOCTYPE, Markup, PreEscaped, Render, html};
 
-const BUTTON: &str = "inline-flex relative items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 ";
+const BUTTON: &str = "inline-flex relative items-center justify-center whitespace-nowrap rounded-md text-sm font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 ";
 
 fn format_title(name: Option<&str>) -> String {
     if let Some(name) = name {
@@ -131,7 +131,7 @@ fn footer() -> Markup {
 fn theme_toggle() -> Markup {
     html! {
         button
-          class="cursor-pointer inline-flex items-center justify-center whitespace-nowrap transition-colors rounded-md text-sm font-medium hover:bg-accent hover:text-accent-foreground h-9 w-9"
+          class="cursor-pointer inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium hover:bg-accent hover:text-accent-foreground h-9 w-9"
           title="Toggle theme"
           aria-label="Toggle theme"
           onClick="toggleTheme()"
@@ -149,7 +149,7 @@ fn theme_toggle() -> Markup {
 fn nav_links() -> Markup {
     let link = |name: &str, href: &str| -> Markup {
         html! {
-            li ."transition-colors" ."text-muted-foreground" ."hover:text-foreground" {
+            li ."text-muted-foreground" ."hover:text-foreground" {
                 a href=(href) { (name) }
             }
         }
