@@ -32,14 +32,7 @@ pub fn page(title: Option<&str>, content: Markup, partial: bool) -> Markup {
                 }
             }
             (footer())
-            aside id="toasts" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50" {
-                (toast("email", html! {
-                    div ".w-4" ."h-4" ."mr-2" {
-                        (PreEscaped(iconify::svg!("carbon:email", width="20", height="20")))
-                    }
-                    "Email Copied"
-                }))
-            }
+            (toast_area())
         }
     }
 }
@@ -163,6 +156,19 @@ fn nav_links() -> Markup {
             (link("home", "/"))
             (link("projects", "/projects"))
             (link("blog", "/blog"))
+        }
+    }
+}
+
+fn toast_area() -> Markup {
+    html! {
+        aside id="toasts" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 overflow-hidden" {
+            (toast("email", html! {
+                div ".w-4" ."h-4" ."mr-2" {
+                    (PreEscaped(iconify::svg!("carbon:email", width="20", height="20")))
+                }
+                "Email Copied"
+            }))
         }
     }
 }
