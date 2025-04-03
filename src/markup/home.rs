@@ -1,13 +1,13 @@
 use maud::{Markup, PreEscaped, html};
 
-use crate::markup::BUTTON;
+use crate::markup::{socials, projects::card::featured, tag, BUTTON};
 
 pub fn page() -> Markup {
     html! {
         article class="mt-8 flex flex-col gap-16 pb-16" {
             (intro())
             (technologies())
-            // (projects())
+            (projects())
         }
     }
 }
@@ -64,7 +64,7 @@ fn intro() -> Markup {
 }
 
 fn technologies() -> Markup {
-    fn item(name: &str, icon: PreEscaped<&str>, dark_icon: Option<PreEscaped<&str>>) -> Markup {
+    fn item(long: &str, short: &str, icon: PreEscaped<&str>, dark_icon: Option<PreEscaped<&str>>) -> Markup {
         html! {
             li ."w-[50px] h-auto" {
                 div ."flex" ."flex-col" ."items-center" ."gap-1" {
@@ -75,12 +75,10 @@ fn technologies() -> Markup {
                             div ."dark:hidden" { (icon) }
                             div ."not-dark:hidden" { (dark_icon) }
                         } @else {
-                            (icon)
+                            div { (icon) }
                         }
                     }
-                    div class="inline-flex items-center rounded-md font-semibold focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 bg-secondary text-secondary-foreground hover:bg-secondary/80 px-1 py-0 text-[10px]" {
-                        (name)
-                    }
+                    (tag(short))
                 }
             }
         }
@@ -91,41 +89,49 @@ fn technologies() -> Markup {
             div ."flex" ."flex-col" ."gap-4" {
                 h1 ."text-2xl" ."font-semibold" { "Technologies I use" }
                 ul .flex ."flex-wrap" ."gap-3" {
-                    (item("Rust", PreEscaped(iconify::svg!("skill-icons:rust", width="42", height="42")), None))
-                    (item("C#", PreEscaped(iconify::svg!("skill-icons:cs", width="42", height="42")), None))
-                    (item("C++", PreEscaped(iconify::svg!("skill-icons:cpp", width="42", height="42")), None))
-                    (item("JS", PreEscaped(iconify::svg!("skill-icons:javascript", width="42", height="42")), None))
-                    (item("TS", PreEscaped(iconify::svg!("skill-icons:typescript", width="42", height="42")), None))
-                    (item("HTML", PreEscaped(iconify::svg!("skill-icons:html", width="42", height="42")), None))
-                    (item("CSS", PreEscaped(iconify::svg!("skill-icons:css", width="42", height="42")), None))
+                    (item("Rust", "Rust", PreEscaped(iconify::svg!("skill-icons:rust", width="42", height="42")), None))
                     (item(
+                        "Cloudflare Workers",
+                        "Workers",
+                        PreEscaped(iconify::svg!("skill-icons:cloudflare-light", width="42", height="42")),
+                        Some(PreEscaped(iconify::svg!("skill-icons:cloudflare-dark", width="42", height="42"))),
+                    ))
+                    (item("C#", "C#", PreEscaped(iconify::svg!("skill-icons:cs", width="42", height="42")), None))
+                    (item("C++", "C++", PreEscaped(iconify::svg!("skill-icons:cpp", width="42", height="42")), None))
+                    (item("JavaScript", "JS", PreEscaped(iconify::svg!("skill-icons:javascript", width="42", height="42")), None))
+                    (item("TypeScript", "TS", PreEscaped(iconify::svg!("skill-icons:typescript", width="42", height="42")), None))
+                    (item("HTML", "HTML", PreEscaped(iconify::svg!("skill-icons:html", width="42", height="42")), None))
+                    (item("CSS", "CSS", PreEscaped(iconify::svg!("skill-icons:css", width="42", height="42")), None))
+                    (item(
+                        "Tailwind CSS",
                         "Tailwind",
                         PreEscaped(iconify::svg!("skill-icons:tailwindcss-light", width="42", height="42")),
                         Some(PreEscaped(iconify::svg!("skill-icons:tailwindcss-dark", width="42", height="42")))
                     ))
                     (item(
+                        "Postgresql",
                         "SQL",
                         PreEscaped(iconify::svg!("skill-icons:postgresql-light", width="42", height="42")),
                         Some(PreEscaped(iconify::svg!("skill-icons:postgresql-dark", width="42", height="42")))
                     ))
-                    (item(
-                        "Workers",
-                        PreEscaped(iconify::svg!("skill-icons:cloudflare-light", width="42", height="42")),
-                        Some(PreEscaped(iconify::svg!("skill-icons:cloudflare-dark", width="42", height="42"))),
-                    ))
-                    (item("Verilog", PreEscaped(iconify::svg!("vscode-icons:file-type-verilog", width="42", height="42")), None))
+                    (item("System Verilog", "Verilog", PreEscaped(iconify::svg!("vscode-icons:file-type-verilog", width="42", height="42")), None))
                 }
             }
         }
     }
 }
 
-// fn projects() -> Markup {
-//     html! {
-//         section class="flex flex-col gap-8" {
-//             div ."flex" ."flex-col" ."gap-4" {
-//                 h1 ."text-2xl" ."font-semibold" { "Featured projects" }
-//             }
-//         }
-//     }
-// }
+fn projects() -> Markup {
+    html! {
+        section class="flex flex-col gap-8" {
+            div ."flex" ."justify-between" {
+                h2 ."text-2xl" ."font-semibold" { "Featured projects" }
+                a ."text-muted-foreground" ."hover:text-foreground" ."flex" ."items-center" ."gap-2" ."font-light" href="/projects" hx-boost="true" hx-target="#content" {
+                    span { "view more" }
+                    (PreEscaped(iconify::svg!("solar:arrow-right-linear", width="20", height="20")))
+                }
+            }
+            (featured(None))
+        }
+    }
+}
