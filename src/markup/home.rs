@@ -71,12 +71,17 @@ fn intro() -> Markup {
 }
 
 fn technologies() -> Markup {
-    fn item(name: &str, icon: PreEscaped<&str>) -> Markup {
+    fn item(name: &str, icon: PreEscaped<&str>, dark_icon: Option<PreEscaped<&str>>) -> Markup {
         html! {
-            li {
+            li ."w-[50px] h-auto" {
                 div ."flex" ."flex-col" ."items-center" ."gap-1" {
                     button class="border border-transparent hover:border-foreground rounded-lg" title=(name) alt=(format!("{} Icon", name)) {
-                        (icon)
+                        @if let Some(dark_icon) = dark_icon {
+                            div ."dark:hidden" { (icon) }
+                            div ."not-dark:hidden" { (dark_icon) }
+                        } @else {
+                            (icon)
+                        }
                     }
                     div class="inline-flex items-center rounded-md font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 bg-secondary text-secondary-foreground hover:bg-secondary/80 px-1 py-0 text-[10px]" {
                         (name)
@@ -90,13 +95,30 @@ fn technologies() -> Markup {
         section class="flex flex-col gap-8" {
             div ."flex" ."flex-col" ."gap-4" {
                 h1 ."text-2xl" ."font-semibold" { "Technologies I use" }
-                ul .grid ."grid-flow-col" ."auto-cols-[32px]" ."gap-4" {
-                    (item("Rust", PreEscaped(iconify::svg!("skill-icons:rust", width="32", height="32"))))
-                    (item("C", PreEscaped(iconify::svg!("skill-icons:c", width="32", height="32"))))
-                    (item("C++", PreEscaped(iconify::svg!("skill-icons:cpp", width="32", height="32"))))
-                    (item("C#", PreEscaped(iconify::svg!("skill-icons:cs", width="32", height="32"))))
-                    (item("SQL", PreEscaped(iconify::svg!("skill-icons:postgresql-light", width="32", height="32"))))
-                    (item("Workers", PreEscaped(iconify::svg!("skill-icons:cloudflare-light", width="32", height="32"))))
+                ul .flex ."flex-wrap" ."gap-3" {
+                    (item("Rust", PreEscaped(iconify::svg!("skill-icons:rust", width="42", height="42")), None))
+                    (item("C#", PreEscaped(iconify::svg!("skill-icons:cs", width="42", height="42")), None))
+                    (item("C++", PreEscaped(iconify::svg!("skill-icons:cpp", width="42", height="42")), None))
+                    (item("JS", PreEscaped(iconify::svg!("skill-icons:javascript", width="42", height="42")), None))
+                    (item("TS", PreEscaped(iconify::svg!("skill-icons:typescript", width="42", height="42")), None))
+                    (item("HTML", PreEscaped(iconify::svg!("skill-icons:html", width="42", height="42")), None))
+                    (item("CSS", PreEscaped(iconify::svg!("skill-icons:css", width="42", height="42")), None))
+                    (item(
+                        "Tailwind",
+                        PreEscaped(iconify::svg!("skill-icons:tailwindcss-light", width="42", height="42")),
+                        Some(PreEscaped(iconify::svg!("skill-icons:tailwindcss-dark", width="42", height="42")))
+                    ))
+                    (item(
+                        "SQL",
+                        PreEscaped(iconify::svg!("skill-icons:postgresql-light", width="42", height="42")),
+                        Some(PreEscaped(iconify::svg!("skill-icons:postgresql-dark", width="42", height="42")))
+                    ))
+                    (item(
+                        "Workers",
+                        PreEscaped(iconify::svg!("skill-icons:cloudflare-light", width="42", height="42")),
+                        Some(PreEscaped(iconify::svg!("skill-icons:cloudflare-dark", width="42", height="42"))),
+                    ))
+                    (item("Verilog", PreEscaped(iconify::svg!("vscode-icons:file-type-verilog", width="42", height="42")), None))
                 }
             }
         }
