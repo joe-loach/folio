@@ -41,6 +41,21 @@
   }
 }
 
+@utility black-white {
+  filter: saturate(0) brightness(0.7) contrast(4);
+  mix-blend-mode: multiply;
+
+  .dark & {
+    filter: saturate(0) brightness(0.7) contrast(2) invert(1);
+    mix-blend-mode: normal;
+  }
+}
+
+@utility no-filter {
+  filter: none;
+  mix-blend-mode: normal;
+}
+
 @layer base {
   :root {
     --background: hsl(0 0% 100%);
