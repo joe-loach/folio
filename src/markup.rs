@@ -156,7 +156,10 @@ fn nav_links() -> Markup {
     };
 
     html! {
-        ul hx-boost="true" hx-target="#content" class="flex gap-4 sm:gap-8" {
+        // HACK: prevent scrolling when clicking boosted links
+        // htmx will try and move you down to the target, we don't want that...
+        // so specify a handle for htmx to scroll to that doesn't exist and it wont move
+        ul hx-boost="true" hx-target="#content" hx-swap="innerHTML show:no-scroll" class="flex gap-4 sm:gap-8" {
             (link("home", "/"))
             (link("projects", "/projects"))
             (link("blog", "/blog"))
