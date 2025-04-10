@@ -62,38 +62,9 @@ fn head(title: Option<&str>) -> Markup {
             script src="/htmx.min.js" {}
 
             // Theme updating
-            (Javascript(r#"
-                const updateTheme = () => {
-                    document.documentElement.classList.toggle(
-                        "dark",
-                        localStorage.theme === "dark" ||
-                            (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches),
-                    );
-                };
-                const setTheme = (theme) => {
-                    localStorage.theme = theme;
-                    updateTheme();
-                };
-                const toggleTheme = () => {
-                    if (localStorage.theme === "dark") {
-                        setTheme("");
-                    } else {
-                        setTheme("dark");
-                    }
-                };
-                updateTheme();
-            "#))
-
-            (Javascript(r##"
-            const toast = (id) => {
-                const toasts = document.getElementById('toasts');
-
-                const child = toasts.querySelector(`#${id}`);
-                child.classList.remove("hidden");
-
-                setTimeout(() => child.classList.add("hidden"), 3000);
-            };
-            "##))
+            (Javascript(include_str!("theming.js")))
+            // Toasts
+            (Javascript(include_str!("toasts.js")))
         }
     }
 }
