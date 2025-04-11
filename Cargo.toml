@@ -14,10 +14,9 @@ crate-type = ["cdylib"]
 
 [dependencies]
 axum = { version = "0.8.1", default-features = false }
+axum-htmx = { version = "0.7.0" }
 worker = { version = "0.5.0", features = ["axum", "http"] }
 tower-service = "0.3.2"
 console_error_panic_hook = { version = "0.1.1" }
-wasm-bindgen-futures = "0.4"
 maud = { version = "0.27.0", features = ["axum"] }
 iconify = "0.3.1"
-axum-htmx = { version = "0.7.0" }

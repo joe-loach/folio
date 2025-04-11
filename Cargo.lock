@@ -290,7 +290,6 @@ dependencies = [
  "iconify",
  "maud",
  "tower-service",
- "wasm-bindgen-futures",
  "worker",
 ]
 
