@@ -24,7 +24,7 @@ pub fn page_layout(title: Option<&str>, content: Markup, partial: bool) -> Marku
 
     html! {
         (head(title))
-        body class="mx-auto flex min-h-screen max-w-3xl flex-col px-8" {
+        body class="mx-auto flex min-h-screen max-w-3xl flex-col px-8" hx-ext="head-support" {
             (header())
             main .grow {
                 div #content {
@@ -61,6 +61,7 @@ fn head(title: Option<&str>) -> Markup {
             // HTMX
             meta name="htmx-config" content="{\"selfRequestsOnly\":false}";
             script src="/htmx.min.js" {}
+            script src="/htmx-ext-head-support.min.js" {}
 
             // Theme updating
             (Javascript(include_str!("theming.js")))
