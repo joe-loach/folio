@@ -8,6 +8,7 @@ pub fn page() -> Markup {
             (intro())
             (technologies())
             (projects())
+            (blog_posts())
         }
     }
 }
@@ -142,6 +143,21 @@ fn projects() -> Markup {
                 }
             }
             (featured(None))
+        }
+    }
+}
+
+fn blog_posts() -> Markup {
+    html! {
+        section class="flex flex-col gap-8" {
+            div ."flex" ."justify-between" {
+                h2 ."text-2xl" ."font-semibold" { "Recent Posts" }
+                a ."text-muted-foreground" ."hover:text-foreground" ."flex" ."items-center" ."gap-2" ."font-light" href="https://blog.joeloach.co.uk" {
+                    span { "view more" }
+                    (PreEscaped(iconify::svg!("solar:arrow-right-linear", width="20", height="20")))
+                }
+            }
+            div hx-get="https://blog.joeloach.co.uk/latest" hx-trigger="load" {}
         }
     }
 }

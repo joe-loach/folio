@@ -59,6 +59,7 @@ fn head(title: Option<&str>) -> Markup {
             title { (format_title(title)) }
 
             // HTMX
+            meta name="htmx-config" content="{\"selfRequestsOnly\":false}";
             script src="/htmx.min.js" {}
 
             // Theme updating
