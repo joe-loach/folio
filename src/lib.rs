@@ -5,8 +5,8 @@ use axum::{
     extract::Request,
     http::{self, HeaderValue, StatusCode, header::VARY},
     middleware::Next,
-    response::{Redirect, Response},
-    routing::{any, get},
+    response::Response,
+    routing::get,
 };
 use axum_htmx::{HX_REQUEST, HxBoosted, HxRequest};
 use markup::page_layout;
@@ -37,10 +37,6 @@ fn router() -> Router {
             ),
         )
         .nest("/projects", markup::projects::router())
-        .route(
-            "/blog",
-            any(|| async { Redirect::permanent("https://blog.joeloach.co.uk") }),
-        )
         .layer(axum::middleware::from_fn(auto_vary))
 }
 
