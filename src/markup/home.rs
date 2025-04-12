@@ -157,7 +157,7 @@ fn blog_posts() -> Markup {
                     (PreEscaped(iconify::svg!("solar:arrow-right-linear", width="20", height="20")))
                 }
             }
-            div hx-get="https://blog.joeloach.co.uk/latest" hx-trigger="load" {}
+            div hx-get="https://blog.joeloach.co.uk/post/latest" hx-trigger="load" {}
         }
     }
 }
