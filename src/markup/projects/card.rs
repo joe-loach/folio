@@ -42,7 +42,7 @@ pub fn featured(cards: Option<[&Project; FEATURED_CARDS_LEN]>) -> Markup {
     }
 }
 
-const CARD_STYLE: &str = "rounded-xl border bg-card text-foreground shadow flex flex-col h-100";
+const CARD_STYLE: &str = "rounded-xl border bg-card text-foreground shadow flex flex-col min-h-100";
 
 impl Render for Project {
     fn render(&self) -> Markup {
